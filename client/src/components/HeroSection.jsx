@@ -11,14 +11,14 @@ const HeroSection = () => {
       <div className="
       hero-section-data">
         <p className="intro-data">Welcome to </p>
-        <h1> Shop Name </h1>
+        <h1>Shopzilla</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
           atque temporibus veniam doloribus libero ad error omnis voluptates
           animi! Suscipit sapiente.
         </p>
         <Link to="/products">
-          <Button>show now</Button>
+          <Button>shop now</Button>
         </Link>
       </div>
       {/* our homepage image  */}
@@ -38,7 +38,7 @@ const HeroSection = () => {
 }
 
 const Wrapper = styled.section`
-  padding: 12rem 0;
+  padding: 7.6rem 8rem;
  
   img {
     min-width: 10rem;
@@ -47,8 +47,7 @@ const Wrapper = styled.section`
 
   .hero-section-data {
     p {
-      margin: 2rem 0;
-    
+      margin: 1.4rem 0; 
     }
 
     h1 {
@@ -58,8 +57,7 @@ const Wrapper = styled.section`
     }
 
     .intro-data {
-      margin-bottom: 0;
-      
+      margin-bottom: 0;  
     }
   }
 
@@ -81,7 +79,7 @@ const Wrapper = styled.section`
       background-color:#B08EAD;
       position: absolute;
       left: 50%;
-      top: -5rem;
+      top: -4rem;
       z-index: -1;
     }
   }
@@ -90,8 +88,9 @@ const Wrapper = styled.section`
     height: auto;
   }
   @media (max-width: 600px) {
+    padding:4rem 0rem;
     .grid {
-      gap: 10rem;
+      gap: 6rem;
     }
     figure::after {
       content: "";
@@ -102,9 +101,20 @@ const Wrapper = styled.section`
       /* bottom: 10%; */
       background-color: #B08EAD;
     }
+    p,button{
+  font-size:0.8rem
+}
+h1{
+  font-size:2.8rem
+}
+h2{
+  font-size:1rem
+ }
   }
 
 
  `;
 
 export default HeroSection
+
+  
