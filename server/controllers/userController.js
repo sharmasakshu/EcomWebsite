@@ -72,4 +72,60 @@ const loginUser = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-module.exports = { registerUser, loginUser }
+
+const getAllUser = async (req, res) => {
+    try {
+        const allUsers = await User.find()
+        if(allUsers.length === 0){
+            return  res.status(404).json({message : "No users found"})
+        }
+        res.status(200).json(allUsers)
+
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+const updateAdmin = async (req, res) => {
+    try {
+        const {_id} = req.params;
+        let token = req.headers.authorization.split(" ")[1]
+        let {_id : userId} = jwt.verify(token, process.env.JWT_SECRET)
+        if(_id === userId ){
+            return res.status(403).json({message : 'User cannot update their own role'})
+        }
+        let existingUser = await User.findById(_id);
+        if(!existingUser){
+            return res.status(404).json({message : 'User not found'})
+        }
+        
+        const updatedUser = await User.findByIdAndUpdate({_id}, {
+            isAdmin : existingUser.isAdmin ? false : true,
+        }, {new : true}) 
+
+        res.status(200).json(updatedUser)
+
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+const deleteUser = async (req, res) => {
+    try {
+        const {_id} = req.params;
+        let token = req.headers.authorization.split(" ")[1]
+        let {_id : userId} = jwt.verify(token, process.env.JWT_SECRET)
+        if(_id === userId ){
+            return res.status(403).json({message : 'User cannot delete themself'})
+        }
+        let existingUser = await User.findById(_id);
+        if(!existingUser){
+            return res.status(404).json({message : 'User not found'})
+        }
+        const deletedUser = await User.findByIdAndDelete(_id)
+        res.status(200).json(deletedUser)
+
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+module.exports = { registerUser, loginUser ,getAllUser ,updateAdmin, deleteUser}

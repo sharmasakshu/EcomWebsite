@@ -20,9 +20,11 @@ const cartSchema = mongoose.Schema({
             type : String,
             required : true,
         },
-        brand : {
-            type : String,
+        countInStock : {
+            type : Number,
             required : true,
+            min:1,
+            maxLength:4,
         },
         price : {
             type : Number,

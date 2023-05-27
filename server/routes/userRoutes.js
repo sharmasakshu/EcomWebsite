@@ -1,6 +1,7 @@
 const {Router} =require("express");
-const {registerUser,loginUser}=require('../controllers/userController')
+const {registerUser,loginUser, getAllUser, updateAdmin, deleteUser}=require('../controllers/userController')
 const { check } = require('express-validator');
+const { verifyUser, verifyAdmin } = require("../middlewares/authMiddleware");
 
 const routes=Router();
 
@@ -47,4 +48,9 @@ validation.passwordValidation[0],
 ],
 loginUser)
 
+routes.get("/allUser",verifyUser,verifyAdmin,getAllUser)
+
+routes.put("/updateUser/:_id",verifyUser,verifyAdmin,updateAdmin)
+
+routes.delete("/deleteUser/:_id",verifyUser,verifyAdmin,deleteUser)
 module.exports=routes;

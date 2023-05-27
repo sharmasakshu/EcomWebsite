@@ -1,12 +1,12 @@
 import React from 'react'
-// import LoginForm from '../components/LoginForm'
-import SignIn from '../components/LoginForm'
+import LoginForm from '../components/LoginForm'
 
 const Login = () => {
   return (
     <div>
-      {/* <LoginForm/> */}
-      <SignIn/>
+      
+      <LoginForm/>
+      {/* <Sort/> */}
     </div>
   )
 }

@@ -8,11 +8,12 @@ import Item from './Item';
 const FeatureProducts = () => {
   const {products,loading,error} =useSelector((state)=> state.productstate);
   console.log(products);
-
   const dispatch=useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [])
+
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, [])
+
   return (
     <Wrapper>
     <div className='container'>
@@ -21,8 +22,8 @@ const FeatureProducts = () => {
         {         
         loading?<h1>loading....</h1>:(
          <h3 className="grid grid-three-column">         
-         { products?.map((product,index)=>(       
-             <Item title={product.name} id={product._id} key={index} description={product.description} image={product.image} price={product.price}/>       
+         { products.filter(product => product?.featured===true)?.map((product,index)=>(     
+             <Item title={product.name} id={product._id} key={index} description={product.description} image={product.image} price={product.price}/>    
          ))
          }
          </h3>
@@ -34,7 +35,7 @@ const FeatureProducts = () => {
 }
 
 const Wrapper=styled.section`
-  padding: 9rem 0;
+  padding: 9rem 8rem;
   background-color:#F4EDF2;
 
   .container {

@@ -12,6 +12,25 @@ import { Link } from 'react-router-dom';
 export default function MediaCard(props) {
 
   return (
+    // <Card sx={{ maxWidth: 345 }}>
+    // <CardMedia
+    //   sx={{ height: 240 }}
+    //   image={props.image}
+    //   alt={props.title}
+    // />
+    // <CardContent>
+    //   <Typography gutterBottom variant="h5" component="div">
+    //   {props.title}
+    //   </Typography>
+    //   <Typography variant="body2" color="text.secondary">
+    //   ₹{props.price}
+    //   </Typography>
+    // </CardContent>
+    /* <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions> */
+     
     <Card
       sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
     >
@@ -31,7 +50,7 @@ export default function MediaCard(props) {
         {props.title}
         </Typography>
         <Typography gutterBottom variant="h5" component="h2" >
-       ₹{props.price}
+       ${props.price}
         </Typography>
       </CardContent>
     </Card>

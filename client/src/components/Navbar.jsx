@@ -22,6 +22,8 @@ import { useSelector,useDispatch} from 'react-redux';
 import {useNavigate } from "react-router-dom"
 import { logout } from '../slices/userSlice';
 import { fetchCartItems } from '../slices/cartSlice';
+import { Badge } from '@mui/material';
+import AdbIcon from '@mui/icons-material/Adb';
 
 function ScrollTop(props) {
 
@@ -63,31 +65,27 @@ ScrollTop.propTypes = {
 };
 
 function Navbar(props) {
-    const {cart} =useSelector((state)=> state.cart);
+    const {cart,totalQty,totalAmount} =useSelector((state)=> state.cart);
     const {user} =useSelector((state)=> state.userstate);
-    console.log(cart)
+    console.log(user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     useEffect(() => {
        user && dispatch(fetchCartItems(user.token))
-    //    const res= axios.get("http://localhost:8080/api/v1/cart");
-    //    console.log(res);
-    }, [])
-
-   
-    // console.log(user);
-
+    }, [totalQty])
    
     const pages = [
-        <Link to="/categories/men" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" ,fontSize:'1.6rem'}}>Men</Link>,
-        <Link to="/categories/women" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" ,fontSize:'1.6rem'}}>Women</Link>,
-        <Link to="/categories/kids" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" ,fontSize:'1.6rem'}}>Kids</Link>,
+        user?.isAdmin ?
+        <Link to="/dashboard" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" }}>Dashboard</Link>:null,
+        <Link to="/about" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" }}>About</Link>,
+        <Link to="/products" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" }}>Products</Link>,
     ];
     
     const settings = [
 
-        user?<Link to="/account" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" ,fontSize:'1.6rem'}}>My Account</Link>:null,
-        user?<Link style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400",fontSize:'1.6rem' }}>Logout</Link>:null
+        user?<Link to="/account" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" }}>My Account</Link>:null,
+        user?<Link style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400" }}>Logout</Link>:null
         // :<Link to="/login" style={{ textDecoration: "none", color: "#4B3049",fontWeight:"400",fontSize:'1.6rem' }}>Login</Link>    
     ];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -134,26 +132,28 @@ function Navbar(props) {
                                 textDecoration: 'none',
                             }}
                         > */}
-                         {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                         <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                         <Link to="/">
                             <Typography
-                                variant="h6"
+                                variant="h4"
                                 noWrap
-                                component="a"
-                                href="/"
+                                // component="a"
+                                // href="/"
                                 sx={{
                                     mr: 2,
                                     display: { xs: 'none', md: 'flex' },
-                                    fontFamily: 'monospace',
-                                    fontSize:'2.2rem',
+                                   
                                     fontWeight: 800,
                                     letterSpacing: '.3rem',
                                     color: '#4B3049',
-                                    // textDecoration: 'none',
+                                    fontFamily: 'rubik',
+                                    textDecoration: 'none',
                                 }}
                             >
-                                LOGO
+                                Shopzilla
 
                             </Typography>
+                            </Link>
                         {/* </Link> */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -164,7 +164,7 @@ function Navbar(props) {
                                 onClick={handleOpenNavMenu}
                                 color="#4B3049"
                             >
-                                <MenuIcon sx={{color:"#4B3049" ,fontSize:'2.4rem'}} />
+                                <MenuIcon sx={{color:"#4B3049" }} />
                             </IconButton>
                           
                             <Menu
@@ -213,14 +213,12 @@ function Navbar(props) {
                                     mr: 2,
                                     display: { xs: 'flex', md: 'none' },
                                     flexGrow: 0.93,
-                                    fontSize: '2.2rem',
-                                    fontFamily: 'monospace',
                                     fontWeight: 700,
                                     letterSpacing: '.3rem',
                                     color: '#4B3049',
                                 }}
                             >
-                                LOGO
+                               Shopzilla
                             </Typography>
                         {/* </Link> */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } ,justifyContent:'center'}}>
@@ -228,7 +226,7 @@ function Navbar(props) {
                                 <Button
                                     key={index}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block', fontSize:'1.4rem' }}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
                                     {page}
                                 </Button>
@@ -238,17 +236,20 @@ function Navbar(props) {
                         <Box sx={{ flexGrow: 0}}>
                             <Link to="/cart">
                             <IconButton sx={{ p: 0, marginRight:"10px", color:"#4B3049" }} color='#4B3049 ' size='large'>
-                                <ShoppingCartIcon sx={{fontSize:'2.4rem'}}/>
+                                <Badge badgeContent={cart && totalQty} color='secondary'>
+                                <ShoppingCartIcon sx={{fontSize:'1.8rem'}}/>
+                                </Badge>
                             </IconButton>
                             </Link>
-                            <Tooltip title="Open settings">
+                            <Tooltip>
                                { user?
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color:"#4B3049" }} color='#4B3049 ' size='large'>
-                                    <AccountCircle sx={{fontSize:'2.4rem'}} />
+                                    <AccountCircle sx={{fontSize:'1.8rem'}} />
                                 </IconButton>
-                                :<IconButton sx={{ p: 0, color:"#4B3049" }}  component="a" href="/login" color='#4B3049' size='large'>
-                                    <AccountCircle sx={{fontSize:'2.4rem'}} />
+                                :<Link to="/login"><IconButton sx={{ p: 0, color:"#4B3049" }} color='#4B3049' size='large'>
+                                    <AccountCircle sx={{fontSize:'1.8rem'}} />
                                 </IconButton>
+                                </Link>
                                  }
                             </Tooltip>
                             <Menu

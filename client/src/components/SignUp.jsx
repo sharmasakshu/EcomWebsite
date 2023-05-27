@@ -103,7 +103,6 @@ export default function SignUp() {
       email:formData.email,
       password:formData.password,
     }))   
-    console.log(error +"  "+loading);
       if(!error && !loading && user)
       {
         navigate('/');
@@ -142,9 +141,9 @@ export default function SignUp() {
         >
           
           <Avatar sx={{ m: 1, backgroundColor:"#4B3049" }}>
-            <LockOutlinedIcon sx={{fontSize:'2.2rem'}}/>
+            <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" sx={{fontSize:'2.4rem'}}>
+          <Typography component="h1" variant="h5" >
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -215,7 +214,7 @@ export default function SignUp() {
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary"/>}
                   // label="I have read and agree to the Terms of Use and Privacy Policy."
-                  label={<Typography sx={{fontSize:'1.4rem'}}>I have read and agree to the Terms of Use and Privacy Policy.</Typography>}     
+                  label={<Typography >I have read and agree to the Terms of Use and Privacy Policy.</Typography>}     
                   id="terms"
                   name="terms"
                   checked={formData.terms}
@@ -227,13 +226,17 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor:"#B08EAD", border:"2px solid #B08EAD" ,fontSize:'1.4rem'}}
+              sx={{':hover': {
+                bgcolor: '#B08EAD', // theme.palette.primary.main
+                color: 'white',
+                // boxShadow:'0px 10px 15px rgba(0, 0, 0, 0.05)'
+              },mt: 3, mb: 2 ,boxShadow:'none', backgroundColor:"#B08EAD", border:"1px solid #B08EAD"}}
             >
-              Sign Up
+               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2" style={{fontSize:'1.4rem'}}>
+                <Link to="/login" variant="body2" >
                   Already have an account? Sign in
                 </Link>
               </Grid>

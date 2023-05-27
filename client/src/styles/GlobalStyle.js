@@ -18,14 +18,14 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+   overflow-x: hidden;
    scrollbar-color: rgb(98 84 243);
-    scrollbar-width: thin;
+   scrollbar-width: thin;
     
 }
 
 body::-webkit-scrollbar {
-  width: 1.5rem;
+  
 }
 
 body::-webkit-scrollbar-track {
@@ -34,7 +34,7 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
  
-  background: #fff;
+    background: #fff;
     border: 5px solid transparent;
     border-radius: 9px;
     background-clip: content-box;
@@ -48,30 +48,30 @@ h1,
 h2,
 h3,
 h4 {
-   font-family: "Work Sans", sans-serif;
+   font-family: "Poppins", sans-serif;
 
 }
 
 h1 {
   
-    font-size: 6rem;
+    font-size: 3.6rem;
     font-weight: 900;
   }
  
    h2 {
-     font-size: 4rem;
+     font-size: 3rem;
      font-weight: 300;
      white-space: normal;  
     }
   
   h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 400;
   }
 
   p, button {
 
-    font-size: 1.65rem;
+    font-size: 1rem;
     line-height: 1.5;
     font-weight:400;
   }
@@ -93,7 +93,7 @@ ${"" /* resuable code section  */}
   
 .grid {
     display: grid;
-    gap: 9rem;
+    gap: 6.4rem;
   }
   
   .grid-two-column {
@@ -123,7 +123,7 @@ ${"" /* resuable code section  */}
  
    @media (max-width: 600px) {
        html {
-      font-size: 50%;
+      
     }
 
 .grid{
